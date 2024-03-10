@@ -1,0 +1,88 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <style>
+        body {
+            font-family: 'Arial', sans-serif;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            height: 100vh;
+            margin: 0;
+            background-color: #1e1e1e;
+            color: #ffffff;
+        }
+
+        .container {
+            text-align: center;
+            padding: 20px;
+            border: 2px solid #336699;
+            border-radius: 10px;
+            box-shadow: 0 0 10px rgba(0, 0, 0, 0.3);
+        }
+
+        input, button {
+            margin: 10px;
+            padding: 10px;
+            font-size: 16px;
+        }
+
+        input {
+            border: 1px solid #336699;
+            border-radius: 5px;
+            padding: 8px;
+        }
+
+        button {
+            background-color: #4caf50;
+            color: #ffffff;
+            border: none;
+            border-radius: 5px;
+            padding: 10px 20px;
+            cursor: pointer;
+        }
+
+        button:hover {
+            background-color: #45a049;
+        }
+
+        h1 {
+            margin-bottom: 20px;
+            color: #336699;
+        }
+
+        #result {
+            font-size: 18px;
+        }
+    </style>
+    <title>Dias Calculator</title>
+</head>
+<body>
+    <div class="container">
+        <h1>Calculadora de dias corridos</h1>
+        <label for="startDate">Data de Início:</label>
+        <input type="date" id="startDate" required>
+
+        <label for="endDate">Data de Fim:</label>
+        <input type="date" id="endDate" required>
+
+        <button onclick="calculateDays()">Calcular</button>
+
+        <p id="result">Dias: </p>
+    </div>
+
+    <script>
+        function calculateDays() {
+            const startDate = new Date(document.getElementById('startDate').value);
+            const endDate = new Date(document.getElementById('endDate').value);
+
+            const timeDiff = Math.abs(endDate.getTime() - startDate.getTime());
+            const daysDifference = Math.ceil(timeDiff / (1000 * 3600 * 24));
+
+            document.getElementById('result').innerText = `Dias: ${daysDifference}`;
+        }
+    </script>
+</body>
+</html>

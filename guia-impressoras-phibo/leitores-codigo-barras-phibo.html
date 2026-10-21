@@ -1,0 +1,299 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="theme-color" content="#081d34">
+  <meta name="description" content="Guia Phibo de leitores de código de barras 1D para EAN-13: modelos de referência, links de compra, testes interativos e solução de problemas.">
+  <title>Leitores de Código de Barras | Central de Orientações Phibo</title>
+  <style>
+    :root{--ink:#10283d;--muted:#667889;--line:#dce7ef;--bg:#f5f9fc;--white:#fff;--brand:#086bdc;--deep:#09223c;--teal:#11b7aa;--amber:#e9a13b;--radius:20px;--shadow:0 12px 36px rgba(14,47,80,.07)}
+    *{box-sizing:border-box}
+    html{scroll-behavior:smooth;scroll-padding-top:85px}
+    body{margin:0;background:var(--bg);color:var(--ink);font:15px/1.65 system-ui,-apple-system,BlinkMacSystemFont,"Segoe UI",sans-serif;-webkit-font-smoothing:antialiased}
+    a{color:inherit;text-decoration:none}button,input{font:inherit}button{cursor:pointer}button:disabled{cursor:not-allowed;opacity:.45}
+    ::selection{background:#b9ecff;color:#0a345b}
+    .wrap{max-width:1192px;margin:auto;padding:0 26px}
+    .topbar{height:76px;display:flex;align-items:center;position:sticky;top:0;z-index:50;background:rgba(255,255,255,.96);border-bottom:1px solid #e1eaf1;backdrop-filter:blur(12px)}
+    .nav{display:flex;align-items:center;justify-content:space-between;width:100%;gap:24px}
+    .logo{display:flex;align-items:center;gap:12px;font-size:19px;font-weight:850;letter-spacing:-.8px;white-space:nowrap}
+    .logo-mark{display:grid;place-items:center;width:38px;height:38px;background:linear-gradient(140deg,#0678ee,#14b2be);color:white;border-radius:11px;box-shadow:0 5px 13px #0875da30}
+    .logo small{display:block;font-size:10px;color:#647f96;font-weight:700;letter-spacing:1.5px;text-transform:uppercase;line-height:1.1}
+    .navlinks{display:flex;align-items:center;gap:22px;font-size:13px;font-weight:750;color:#496075}
+    .navlinks a:hover{color:var(--brand)}
+    .backlink{display:inline-flex;align-items:center;gap:8px;padding:10px 14px;border-radius:10px;color:var(--brand);background:#e8f2ff;font-weight:800;font-size:12px;white-space:nowrap}
+    .backlink:hover{background:#d4e8ff}
+    .hero{background:radial-gradient(circle at 91% 13%,#145c8969,transparent 36%),radial-gradient(circle at 52% 110%,#04a5c638,transparent 42%),linear-gradient(120deg,#09213b,#0b3153 70%,#0b405d);color:#fff;overflow:hidden}
+    .hero-grid{min-height:448px;display:grid;grid-template-columns:1.08fr .92fr;align-items:center;gap:38px;padding:60px 0 64px}
+    .eyebrow{display:inline-flex;align-items:center;gap:9px;font-size:11px;font-weight:850;letter-spacing:1.3px;text-transform:uppercase;color:#80e2ed}
+    .eyebrow:before{content:"";width:7px;height:7px;border-radius:50%;background:#20dfbe;box-shadow:0 0 0 5px #20dfbe24}
+    h1,h2,h3,p{margin-top:0}
+    h1{max-width:610px;font-size:clamp(36px,4.45vw,59px);line-height:1.11;letter-spacing:-2.3px;margin:19px 0 17px;font-weight:850}
+    h1 span{color:#79e7e2}
+    .hero-p{max-width:570px;color:#c2d8e8;font-size:16px;line-height:1.8;margin-bottom:26px}
+    .hero-actions{display:flex;flex-wrap:wrap;gap:11px}
+    .btn{display:inline-flex;align-items:center;justify-content:center;gap:9px;padding:12px 18px;min-height:44px;border-radius:11px;border:1px solid transparent;font-size:13px;font-weight:820;line-height:1.2;transition:.18s ease}
+    .btn:hover{transform:translateY(-2px)}
+    .btn-primary{background:#0e8cf1;color:white;box-shadow:0 8px 18px #005bc02d}.btn-primary:hover{background:#0377d4}
+    .btn-white{background:white;color:#0a4077}.btn-white:hover{background:#eaf6ff}
+    .btn-outline{border-color:#7794ab75;background:#ffffff08;color:#e5f3ff}.btn-outline:hover{background:#ffffff1a}
+    .btn-ghost{border-color:var(--line);color:#225573;background:#fff}.btn-ghost:hover{background:#edf7ff}
+    .hero-highlights{display:flex;flex-wrap:wrap;gap:19px;margin-top:28px;color:#aecbd9;font-size:12px;font-weight:650}
+    .hero-highlights span{display:inline-flex;align-items:center;gap:6px}.check-dot{color:#66e5b9}
+    .hero-art{position:relative;isolation:isolate;padding:30px 17px}
+    .art-glow{position:absolute;inset:9% 0;background:#21aee61b;filter:blur(55px);z-index:-1}
+    .art-frame{transform:rotate(-6deg);border:1px solid #ffffff36;background:linear-gradient(160deg,#ffffff1b,#e9fbff08);border-radius:25px;box-shadow:0 25px 65px #0005;padding:25px;backdrop-filter:blur(9px)}
+    .art-top{display:flex;justify-content:space-between;align-items:center;color:#bad5e5;font-size:10px;font-weight:800;letter-spacing:1.7px;margin-bottom:20px}
+    .art-top span:last-child{color:#6fead8}
+    .barcode-paper{background:#fff;border-radius:14px;padding:30px 20px 13px;box-shadow:0 7px 25px #030c1329;text-align:center;overflow:hidden}
+    .barcode-paper svg{display:block;width:100%;max-width:330px;margin:0 auto}
+    .barcode-sub{color:#526379;font-size:10px;font-weight:800;letter-spacing:2px;margin-top:7px}
+    .art-bottom{display:flex;align-items:center;justify-content:space-between;margin-top:19px;color:#d9eaf5;font-size:11px}
+    .scanlive{display:flex;align-items:center;gap:6px;color:#80f0bf}.scanlive i{width:7px;height:7px;background:#2cefc0;border-radius:50%;box-shadow:0 0 0 5px #2cefc018}
+    .scan-line{height:3px;width:95%;background:linear-gradient(90deg,transparent,#4ceadf,transparent);position:absolute;top:52%;left:3%;box-shadow:0 0 24px #40e5d8aa;transform:rotate(-6deg);opacity:.82;pointer-events:none}
+    .stats{position:relative;margin-top:-24px;z-index:2}
+    .stats-inner{display:grid;grid-template-columns:repeat(4,1fr);border:1px solid var(--line);background:#fff;box-shadow:var(--shadow);border-radius:17px;padding:21px 28px;gap:18px}
+    .stat{display:flex;gap:12px;align-items:center}.stat-icon{flex:none;width:37px;height:37px;border-radius:12px;display:grid;place-items:center;background:#eaf3fc;color:#086bdc;font-size:19px}.stat strong{display:block;font-size:16px;line-height:1.2}.stat small{display:block;color:var(--muted);font-size:11px;font-weight:650;margin-top:3px}
+    .section{padding:88px 0 0}
+    .section-head{display:flex;justify-content:space-between;align-items:end;gap:20px;margin-bottom:25px}
+    .kicker{color:var(--brand);font-size:11px;font-weight:900;letter-spacing:1.6px;text-transform:uppercase;margin-bottom:9px}
+    h2{font-size:clamp(27px,3.2vw,37px);letter-spacing:-1.4px;line-height:1.23;font-weight:850;margin:0 0 10px}
+    .lead{color:var(--muted);font-size:14px;max-width:710px;line-height:1.75;margin:0}
+    .filter-panel{display:flex;gap:8px;align-items:center;flex-wrap:wrap}
+    .filter{border:1px solid #d6e3ee;border-radius:100px;background:#fff;color:#597082;font-size:12px;font-weight:800;padding:9px 15px}
+    .filter.active{background:#0c3456;border-color:#0c3456;color:#fff}
+    .models{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:17px}
+    .product{display:flex;flex-direction:column;background:#fff;border:1px solid #deebf4;border-radius:18px;overflow:hidden;min-width:0;transition:.18s;box-shadow:0 4px 20px #0c375008}
+    .product:hover{transform:translateY(-3px);box-shadow:var(--shadow);border-color:#c1dbea}
+    .p-visual{height:170px;display:flex;align-items:center;justify-content:center;position:relative;background:linear-gradient(145deg,#eff5f9,#e4edf5);overflow:hidden}
+    .p-visual.teal{background:linear-gradient(145deg,#e6f7f6,#e4eff4)}
+    .p-visual.blue{background:linear-gradient(145deg,#e9f4ff,#ebf0fa)}
+    .p-visual .product-img{width:80%;height:96%;object-fit:contain;mix-blend-mode:multiply;display:block;filter:drop-shadow(0 5px 8px #526a7934)}
+    .p-visual .fallback{display:none;font-size:64px;color:#3f6a86;line-height:1}
+    .p-visual .scanner-illust{width:165px;height:135px;filter:drop-shadow(0 12px 10px #183d5a24)}
+    .p-visual .scanner-placeholder{position:absolute;inset:0;margin:auto;width:170px;height:140px;z-index:1;pointer-events:none}.p-visual .product-img{position:relative;z-index:2}
+    .p-tag{position:absolute;left:15px;top:14px;padding:5px 10px;background:#ffffffec;color:#255775;border:1px solid #d8e5eb;border-radius:7px;font-size:10px;font-weight:850;letter-spacing:.35px}
+    .p-body{padding:20px 20px 13px;flex:1}
+    .product h3{font-size:17px;letter-spacing:-.4px;margin:0 0 6px;line-height:1.35}
+    .desc{font-size:12.5px;color:#65788a;line-height:1.7;min-height:43px;margin:0 0 13px}
+    .tags{display:flex;flex-wrap:wrap;gap:6px;margin-bottom:10px}
+    .tags span{background:#ecf4f9;color:#2e667e;padding:5px 9px;font-size:10px;border-radius:6px;font-weight:770}
+    .p-note{border-top:1px solid #eff3f7;padding-top:12px;font-size:11.5px;color:#546c7f;line-height:1.65;margin:0}
+    .p-actions{padding:0 20px 20px;display:flex;gap:8px;flex-wrap:wrap}
+    .p-actions a{flex:1;min-width:112px;font-size:12px}
+    .p-source{display:inline-flex;align-items:center;justify-content:center;padding:10px 12px;border:1px solid #dbe8f1;border-radius:10px;font-weight:800;color:#356982;background:#f8fbfe}
+    .p-source:hover{background:#edf7ff}
+    .notice{margin-top:18px;display:flex;gap:13px;border:1px solid #d4e8f7;background:#eef7ff;border-radius:14px;padding:16px 20px;color:#325977;font-size:12.5px;line-height:1.75}
+    .notice strong{color:#0c497e}.notice-ico{font-size:19px;flex:none}
+    .split{display:grid;grid-template-columns:1fr 1fr;gap:22px;align-items:stretch}
+    .card{background:#fff;border:1px solid var(--line);border-radius:18px;padding:25px;box-shadow:0 3px 19px #17334a06}
+    .card h3{font-size:19px;letter-spacing:-.45px;margin:0 0 13px}.card p{font-size:13px;color:var(--muted)}
+    .info-list{padding:0;margin:18px 0 0;list-style:none}.info-list li{display:flex;gap:10px;padding:11px 0;border-bottom:1px solid #eaf0f5;font-size:13px}.info-list li:last-child{border-bottom:0}.info-list li b{color:#129f94;font-size:15px}.info-list li span{color:#5d7181}
+    .mini-code{display:grid;grid-template-columns:repeat(13,1fr);gap:3px;padding:16px;background:#f1f6fa;border-radius:10px;text-align:center}
+    .mini-code span{font-weight:850;color:#133a5c;font-size:clamp(10px,1.5vw,17px)}.mini-code span:last-child{color:#0789c8;background:#def6fb;border-radius:5px}
+    .legend{display:flex;flex-wrap:wrap;justify-content:space-between;gap:5px;color:#5c7082;font-size:11px;margin-top:8px}
+    .legend strong{color:#16537f}.steps{display:grid;grid-template-columns:repeat(3,1fr);gap:16px;margin-top:18px}
+    .step{background:#fff;border:1px solid var(--line);border-radius:14px;padding:22px;position:relative}
+    .step b{display:grid;place-items:center;width:32px;height:32px;border-radius:9px;background:#e6f4ff;color:#1271c0;font-size:13px;margin-bottom:11px}
+    .step h3{font-size:14px;margin-bottom:7px}.step p{font-size:12.5px;color:var(--muted);margin:0}
+    .tools{display:grid;grid-template-columns:1.05fr .95fr;gap:18px}
+    .tool .form-row{display:flex;gap:10px;margin:14px 0 10px}
+    .field{width:100%;min-width:0;background:#f8fbfe;border:1px solid #cddfec;border-radius:10px;padding:12px 13px;outline:none;color:#112c47;transition:border-color .15s, box-shadow .15s}
+    .field:focus{border-color:#1389d8;box-shadow:0 0 0 4px #1389d81a}
+    .field-label{display:block;font-size:11px;text-transform:uppercase;letter-spacing:1px;color:#607b8f;font-weight:850;margin-top:17px}
+    .tool .hint{font-size:11.5px;color:#7a8c9d;margin:0 0 12px}
+    .result{margin-top:15px;border:1px solid #dce9f3;border-radius:12px;background:#f5f9fd;padding:12px 14px;font-size:12px;color:#5c7386;min-height:56px}
+    .result.ok{background:#edf9f3;border-color:#bee8d1;color:#1b7250}
+    .result.warn{background:#fff8e9;border-color:#f2d8a2;color:#87580e}
+    .result.error{background:#fff1f1;border-color:#f4c8c8;color:#994145}
+    .svg-view{border:1px dashed #d9e5ef;background:#fff;min-height:170px;border-radius:12px;display:flex;align-items:center;justify-content:center;overflow:hidden;padding:13px}
+    .svg-view svg{max-width:100%;width:min(100%,420px);height:auto}
+    .tool-actions{display:flex;gap:8px;flex-wrap:wrap;margin-top:13px}
+    .tool-actions .btn{font-size:12px}
+    .compare-table{border:1px solid var(--line);border-radius:15px;background:#fff;overflow:auto}
+    table{width:100%;border-collapse:collapse;text-align:left;min-width:690px}
+    th{background:#edf4fa;color:#45657b;font-size:11px;text-transform:uppercase;letter-spacing:.5px;padding:15px 16px}
+    td{border-top:1px solid #e7eef4;padding:14px 16px;color:#597083;font-size:12px;vertical-align:top}
+    td:first-child{font-weight:820;color:#193a54}
+    .pill{display:inline-flex;padding:4px 9px;background:#e8f3fb;border-radius:20px;color:#246b9e;font-weight:850;font-size:10px}
+    .pill.wifi{background:#e2f8f3;color:#187968}
+    .faq{display:grid;grid-template-columns:1fr 1fr;gap:11px}
+    details{background:#fff;border:1px solid var(--line);border-radius:13px;padding:16px 20px;align-self:start}
+    details[open]{border-color:#b9d8ea;box-shadow:0 6px 17px #0f375c0a}
+    summary{cursor:pointer;font-size:13px;font-weight:780;color:#243f58;list-style:none;display:flex;justify-content:space-between;gap:18px;align-items:center}
+    summary::-webkit-details-marker{display:none}
+    summary:after{content:"+";font-size:21px;color:#0d78c3;line-height:1}details[open] summary:after{content:"−"}
+    details p{border-top:1px solid #e9f0f6;padding-top:12px;margin:12px 0 0;font-size:12.5px;color:#627989;line-height:1.8}
+    .source-panel{background:#fff;border:1px solid var(--line);border-radius:14px;padding:19px 25px;display:grid;grid-template-columns:1fr 1fr;gap:12px}
+    .source-panel a{font-size:12px;color:#2d6e9b;display:flex;align-items:center;gap:9px;line-height:1.5}
+    .source-panel a:hover{text-decoration:underline}
+    .disclaimer{background:linear-gradient(115deg,#0b2d4b,#104c70);border-radius:20px;padding:26px 31px;color:#fff;display:grid;grid-template-columns:auto 1fr;gap:17px;align-items:start}
+    .disclaimer b{font-size:14px;display:block;margin-bottom:4px}.disclaimer p{font-size:12.5px;color:#c4dce8;margin:0;line-height:1.9}
+    footer{margin-top:85px;padding:28px 0 40px;background:#071d32;color:#a9c0d0}
+    .footer-content{display:flex;justify-content:space-between;align-items:center;gap:15px;font-size:11px;flex-wrap:wrap}
+    .footer-content strong{color:#fff;font-size:16px}.footer-content a{color:#b9e8fe}
+    .toast{position:fixed;bottom:22px;right:22px;z-index:100;background:#0d3656;color:white;border-radius:11px;padding:13px 18px;box-shadow:0 13px 36px #0a2d4550;font-size:12px;font-weight:700;opacity:0;transform:translateY(15px);pointer-events:none;transition:.2s}.toast.show{opacity:1;transform:translateY(0)}
+    .muted-note{color:#8194a3;font-size:11px;margin-top:11px;line-height:1.7}
+    .hide{display:none!important}
+    @media(max-width:1030px){.navlinks{gap:12px}.models{grid-template-columns:repeat(2,minmax(0,1fr))}.hero-grid{gap:14px}.stats-inner{grid-template-columns:repeat(2,1fr)}.hero-art{padding:20px 0}}
+    @media(max-width:730px){.wrap{padding:0 17px}.topbar{height:66px}.navlinks{display:none}.logo{font-size:17px}.hero-grid{grid-template-columns:1fr;padding:45px 0 54px}.hero-art{max-width:460px;width:95%;margin:10px auto 0}.hero-p{font-size:14px}.art-frame{transform:rotate(-3deg)}.scan-line{transform:rotate(-3deg)}h1{letter-spacing:-1.5px}.stats-inner{padding:15px;gap:11px}.stat{gap:8px}.stat strong{font-size:13px}.stat small{font-size:10px}.stat-icon{width:31px;height:31px;font-size:15px}.section{padding-top:66px}.section-head{display:block}.filter-panel{margin-top:20px}.models{grid-template-columns:1fr}.split,.tools,.faq,.source-panel{grid-template-columns:1fr}.steps{grid-template-columns:1fr}.card{padding:21px}.p-visual{height:185px}.disclaimer{padding:23px;gap:12px}.hero-highlights{gap:10px 16px}.tool .form-row{flex-wrap:wrap}.tool .form-row>*{width:100%}.stats{margin-top:-19px}}
+    @media(max-width:420px){.backlink{font-size:0;padding:9px 10px}.backlink::after{content:'← Fontes';font-size:11px}.logo{font-size:16px;gap:8px}}
+    @media(max-width:360px){.logo small{display:none}.nav{gap:8px}}
+    @media print{.topbar,.hero-actions,.filter-panel,.p-actions,.tool-actions,.no-print{display:none!important}.hero{background:#0b2a46!important;-webkit-print-color-adjust:exact;print-color-adjust:exact}.hero-grid{min-height:0;padding:25px 0}.section{padding:24px 0 0}.product{break-inside:avoid}.faq{display:block}.faq details{break-inside:avoid;margin-bottom:8px}.models{grid-template-columns:repeat(2,minmax(0,1fr))}.stats{margin-top:10px}footer{margin-top:30px}}
+  </style>
+</head>
+<body>
+<header class="topbar">
+ <div class="wrap nav">
+   <a class="logo" href="#inicio" aria-label="Página inicial dos leitores Phibo"><span class="logo-mark" aria-hidden="true">▥</span><span>PHIBO <small>Central de orientações</small></span></a>
+   <nav class="navlinks" aria-label="Navegação da página"><a href="#modelos">Modelos</a><a href="#ean13">EAN-13</a><a href="#comparativo">Comparativo</a><a href="#duvidas">Dúvidas</a></nav>
+   <!-- Integração: altere 'fontes.html' se o arquivo da sua página Fontes tiver outro endereço. -->
+   <a class="backlink" href="index.html" title="Voltar ao guia de impressoras">← Voltar ao guia</a>
+ </div>
+</header>
+<main>
+<section class="hero" id="inicio">
+ <div class="wrap hero-grid">
+  <div>
+   <span class="eyebrow">Guia técnico de referência • Phibo</span>
+   <h1>Leitores de <span>código de barras</span> para o seu negócio.</h1>
+   <p class="hero-p">Encontre modelos indicados como referência, entenda a leitura do código EAN-13 e realize testes simples antes de utilizar o leitor no atendimento e no cadastro de produtos.</p>
+   <div class="hero-actions"><a class="btn btn-primary" href="#modelos">Conhecer os leitores <span aria-hidden="true">↗</span></a><a class="btn btn-outline" href="#ean13">Entenda o EAN-13 →</a></div>
+   <div class="hero-highlights"><span><span class="check-dot">✓</span> Foco no EAN-13</span><span><span class="check-dot">✓</span> Conexão USB e sem fio</span><span><span class="check-dot">✓</span> Diagnóstico interativo</span></div>
+  </div>
+  <div class="hero-art" aria-label="Demonstração visual de código de barras EAN-13">
+   <div class="art-glow"></div><div class="art-frame">
+    <div class="art-top"><span>LEITURA DE PRODUTOS</span><span>● EAN / GTIN</span></div>
+    <div class="barcode-paper"><div id="heroBarcode"></div><div class="barcode-sub">CÓDIGO ILUSTRATIVO PARA TESTES</div></div>
+    <div class="art-bottom"><span>EAN-13 · PADRÃO 1D</span><span class="scanlive"><i></i> Leitura linear</span></div>
+   </div><div class="scan-line"></div>
+  </div>
+ </div>
+</section>
+<div class="wrap stats"><div class="stats-inner">
+ <div class="stat"><span class="stat-icon">▥</span><div><strong>EAN-13</strong><small>13 dígitos numéricos</small></div></div>
+ <div class="stat"><span class="stat-icon">◫</span><div><strong>1D</strong><small>Leitura de barras lineares</small></div></div>
+ <div class="stat"><span class="stat-icon">⌁</span><div><strong>USB / sem fio</strong><small>Opções de conectividade</small></div></div>
+ <div class="stat"><span class="stat-icon">✓</span><div><strong>5 links</strong><small>Referências de compra</small></div></div>
+</div></div>
+<section class="section" id="modelos">
+ <div class="wrap">
+  <div class="section-head"><div><div class="kicker">01 / Modelos de referência</div><h2>Leitores indicados para consulta</h2><p class="lead">Cinco opções informadas para orientar a escolha de leitores que possam realizar leitura do código de barras impresso. Consulte as especificações do anúncio antes de comprar.</p></div>
+   <div class="filter-panel" aria-label="Filtrar leitores"><button class="filter active" type="button" data-filter="todos" aria-pressed="true">Todos (5)</button><button class="filter" type="button" data-filter="usb" aria-pressed="false">Com fio USB</button><button class="filter" type="button" data-filter="wireless" aria-pressed="false">Sem fio</button></div></div>
+  <div class="models" id="productGrid">
+   <article class="product" data-connection="usb">
+    <div class="p-visual blue"><span class="p-tag">COM FIO USB</span><img class="product-img" loading="lazy" alt="Leitor C3Tech LB-50 com suporte" src="https://images.tcdn.com.br/img/img_prod/1387046/leitor_de_codigo_de_barras_c3tech_lb_50bk_cabo_usb_leitura_de_codigos_1d_danfe_boletos_bancarios_sen_3549_1_e24221b92854f8857ed717a8593c4baa.jpg" onerror="this.style.display='none';this.nextElementSibling.style.display='block'"><span class="fallback" aria-hidden="true">▥</span></div>
+    <div class="p-body"><h3>C3Tech LB-50</h3><p class="desc">Modelo com conexão USB indicado para balcões e pontos de atendimento com computador próximo.</p><div class="tags"><span>Leitura 1D</span><span>EAN-13</span><span>USB</span></div><p class="p-note">O fabricante informa suporte a EAN-13, leitura laser e uso manual ou automático.</p></div>
+    <div class="p-actions"><a class="btn btn-primary" target="_blank" rel="noopener noreferrer sponsored" href="https://mercadolivre.com/sec/2GkJPqz">Onde comprar ↗</a><a class="p-source" href="https://www.c3technology.com.br/leitor-de-codigo-de-barras-1d-usb-lb-50bk-c3tech/p" target="_blank" rel="noopener noreferrer">Ficha técnica ↗</a></div>
+   </article>
+   <article class="product" data-connection="usb">
+    <div class="p-visual"><span class="p-tag">COM FIO USB</span><img class="product-img" loading="lazy" alt="Leitor Elgin Flash II preto" src="https://ldntech.com.br/images/products/umXNVELyzF1uwj81OGjGqXeL1npJsebhM04q5iLS.jpg" onerror="this.style.display='none';this.nextElementSibling.style.display='block'"><span class="fallback" aria-hidden="true">▥</span></div>
+    <div class="p-body"><h3>Elgin Flash II</h3><p class="desc">Leitor linear de imagem com conexão USB para uso em estabelecimentos comerciais.</p><div class="tags"><span>Leitura 1D</span><span>EAN-13</span><span>Até 300 leituras/s</span></div><p class="p-note">A ficha oficial informa tecnologia Linear Imager, cabo USB de 2 m e garantia de 3 anos.</p></div>
+    <div class="p-actions"><a class="btn btn-primary" target="_blank" rel="noopener noreferrer sponsored" href="https://mercadolivre.com/sec/2zkYsvY">Onde comprar ↗</a><a class="p-source" href="https://www.elgin.com.br/leitor-de-codigo-de-barras-flash-ii-linear-300-ss-usb/p" target="_blank" rel="noopener noreferrer">Ficha técnica ↗</a></div>
+   </article>
+   <article class="product" data-connection="wireless">
+    <div class="p-visual teal"><span class="p-tag">SEM FIO / USB</span>
+      <svg class="scanner-illust" viewBox="0 0 180 155" role="img" aria-label="Ilustração genérica de leitor sem fio"><defs><linearGradient id="scA" x1="0" x2="1" y1="0" y2="1"><stop stop-color="#4f718c"/><stop offset="1" stop-color="#0b263d"/></linearGradient></defs><path d="M74 36L106 42 130 61 117 78 110 122Q107 136 93 135L76 129Q70 123 75 109L79 78 63 61Z" fill="url(#scA)"/><path d="M46 23Q53 12 74 14L133 27Q143 30 145 41L146 58Q146 69 135 74L65 66Q46 63 43 49Z" fill="#172a3b"/><path d="M45 32Q49 24 60 24L130 36Q138 38 136 47L55 40Z" fill="#7e9aa7"/><path d="M85 78l23 2-8 30-18-3Z" fill="#2c526b"/><path d="M77 75l15 3-3 12-16-3Z" fill="#e8ac36"/><rect x="123" y="123" width="27" height="13" rx="3" fill="#29475e"/><rect x="133" y="114" width="7" height="18" rx="1" fill="#a6c6d5"/></svg>
+    </div>
+    <div class="p-body"><h3>Goldensky GS-L8</h3><p class="desc">Opção sem fio anunciada com conexão USB, indicada para quem precisa de maior mobilidade.</p><div class="tags"><span>EAN-13 informado</span><span>Sem fio</span><span>USB</span></div><p class="p-note">A página da marca lista EAN-13 e também QR Code; confirme a versão e os acessórios exatos do anúncio.</p></div>
+    <div class="p-actions"><a class="btn btn-primary" target="_blank" rel="noopener noreferrer sponsored" href="https://mercadolivre.com/sec/2JaVfE5">Onde comprar ↗</a><a class="p-source" href="https://www.goldensky.com.br/informatica-eletronicos/informatica-acessorios/leitor-qr-code-codigo-de-barras-semfio-wireless-usb-2d-danfe" target="_blank" rel="noopener noreferrer">Especificações ↗</a></div>
+   </article>
+   <article class="product" data-connection="usb">
+    <div class="p-visual blue"><span class="p-tag">COM SUPORTE</span><img class="product-img" loading="lazy" alt="C3Tech LB-50 equipado com base de apoio" src="https://images.tcdn.com.br/img/img_prod/1387046/leitor_de_codigo_de_barras_c3tech_lb_50bk_cabo_usb_leitura_de_codigos_1d_danfe_boletos_bancarios_sen_3549_1_e24221b92854f8857ed717a8593c4baa.jpg" onerror="this.style.display='none';this.nextElementSibling.style.display='block'"><span class="fallback" aria-hidden="true">▥</span></div>
+    <div class="p-body"><h3>C3Tech LB-50 com suporte</h3><p class="desc">Alternativa do mesmo modelo para quem deseja apoio na bancada do caixa.</p><div class="tags"><span>Leitura 1D</span><span>EAN-13</span><span>Suporte</span></div><p class="p-note">Verifique no anúncio da Shopee se leitor, cabo USB e suporte estão incluídos no kit.</p></div>
+    <div class="p-actions"><a class="btn btn-primary" target="_blank" rel="noopener noreferrer sponsored" href="https://s.shopee.com.br/8Kdja76Tjf">Onde comprar ↗</a><a class="p-source" href="https://www.c3technology.com.br/fichatecnica/LB-50BK" target="_blank" rel="noopener noreferrer">Ficha técnica ↗</a></div>
+   </article>
+   <article class="product" data-connection="wireless">
+    <div class="p-visual"><span class="p-tag">SEM FIO 2,4 GHz</span><img class="product-img" loading="lazy" alt="Leitor sem fio Exbom LCB-S600A com receptor USB" src="https://redeloja-global.b-cdn.net/arquivos/produtos/e4b8e44b-6578-4589-b168-1dabd7144e76/83de0fd3-9ac8-4970-94bf-d7cb6d53936a.jpg?v=1780326693" onerror="this.style.display='none';this.nextElementSibling.style.display='block'"><span class="fallback" aria-hidden="true">▥</span></div>
+    <div class="p-body"><h3>Exbom LCB-S600A</h3><p class="desc">Leitor portátil 1D com comunicação sem fio por receptor USB de 2,4 GHz.</p><div class="tags"><span>Leitura 1D</span><span>EAN-13*</span><span>2,4 GHz</span></div><p class="p-note">É anunciado como leitor 1D para comércio. Confirme EAN-13, receptor e acessórios com o vendedor.</p></div>
+    <div class="p-actions"><a class="btn btn-primary" target="_blank" rel="noopener noreferrer sponsored" href="https://s.shopee.com.br/8ztQNObzlo">Onde comprar ↗</a><a class="p-source" href="https://www.kabum.com.br/produto/533011/leitor-codigo-de-barras-exbom-usb-sem-fio-2-4ghz-lcb-s600a" target="_blank" rel="noopener noreferrer">Descrição ↗</a></div>
+   </article>
+  </div>
+  <div class="notice"><span class="notice-ico">ⓘ</span><span><strong>Orientação Phibo:</strong> os modelos acima são referências para leitura de códigos impressos. A Phibo <strong>não comercializa</strong> esses leitores e não garante anúncios, preços, estoque ou compatibilidade de todas as versões. Se algum link estiver indisponível, pesquise pelo nome exato do modelo no fornecedor de sua preferência. <strong>Os modelos 1D não devem ser comprados com a expectativa de ler QR Code.</strong></span></div>
+ </div>
+</section>
+<section class="section" id="ean13"><div class="wrap">
+ <div class="section-head"><div><div class="kicker">02 / Entenda o padrão</div><h2>O que é o EAN-13?</h2><p class="lead">O EAN-13 é a representação em barras de um GTIN-13, número utilizado na identificação de produtos comerciais. Seu último dígito é calculado matematicamente para ajudar a identificar erros na sequência.</p></div></div>
+ <div class="split">
+  <div class="card"><h3>Os 13 dígitos do código</h3><p>Exemplo numérico fictício, utilizado apenas nesta demonstração:</p><div class="mini-code" aria-label="Exemplo 7890123456784"><span>7</span><span>8</span><span>9</span><span>0</span><span>1</span><span>2</span><span>3</span><span>4</span><span>5</span><span>6</span><span>7</span><span>8</span><span>4</span></div><div class="legend"><span><strong>789</strong> Prefixo GS1 Brasil</span><span>Identificação do produto (comprimento variável)</span><span><strong>4</strong> Verificador</span></div><p class="muted-note">Os prefixos 789 e 790 identificam a entidade GS1 que atribuiu a numeração — não provam onde o produto foi fabricado. O número mostrado aqui não é concedido pela GS1 e não deve ser utilizado como identificação comercial.</p></div>
+  <div class="card"><h3>Por que a leitura pode falhar?</h3><ul class="info-list"><li><b>✓</b><span><strong>Barras e espaços definidos:</strong> evite códigos borrados, cortados ou distorcidos na impressão.</span></li><li><b>✓</b><span><strong>Margens em branco:</strong> mantenha a área livre à esquerda e à direita das barras (zona de silêncio).</span></li><li><b>✓</b><span><strong>Contraste adequado:</strong> prefira barras escuras sobre fundo claro e sem reflexos.</span></li><li><b>✓</b><span><strong>Leitor compatível:</strong> confirme que EAN-13 está habilitado no manual do dispositivo.</span></li></ul></div>
+ </div>
+ <div class="steps"><div class="step"><b>01</b><h3>Cadastre o código correto</h3><p>O código de produto deve conter os 13 dígitos esperados e estar associado ao item correto no sistema.</p></div><div class="step"><b>02</b><h3>Imprima com qualidade</h3><p>Mantenha barras nítidas, fundo claro e margens livres; evite redimensionamentos que deformem o símbolo.</p></div><div class="step"><b>03</b><h3>Configure o leitor</h3><p>Para preencher campos de texto, use o modo USB HID/teclado, quando disponível, e configure o Enter conforme o fluxo do sistema.</p></div></div>
+</div></section>
+<section class="section" id="comparativo"><div class="wrap">
+ <div class="section-head"><div><div class="kicker">03 / Escolha com critério</div><h2>Comparativo rápido</h2><p class="lead">O melhor equipamento depende do modo de atendimento. Para um ponto de venda fixo, USB costuma simplificar a instalação; para circulação no estoque, sem fio oferece mobilidade.</p></div></div>
+ <div class="compare-table"><table><thead><tr><th>Modelo indicado</th><th>Conexão anunciada</th><th>Uso mais adequado</th><th>Atenção antes da compra</th></tr></thead><tbody>
+  <tr><td>C3Tech LB-50</td><td><span class="pill">USB</span></td><td>Caixa e balcão fixo</td><td>Confirme modelo e suporte incluído</td></tr>
+  <tr><td>Elgin Flash II</td><td><span class="pill">USB</span></td><td>Uso frequente no caixa</td><td>Modelo 1D; não é leitor de QR</td></tr>
+  <tr><td>Goldensky GS-L8</td><td><span class="pill wifi">Sem fio / USB</span></td><td>Atendimento com mobilidade</td><td>Confirme a revisão do produto e o tipo de receptor</td></tr>
+  <tr><td>C3Tech LB-50 + suporte</td><td><span class="pill">USB</span></td><td>Bancada de atendimento</td><td>Verifique o conteúdo do kit</td></tr>
+  <tr><td>Exbom LCB-S600A</td><td><span class="pill wifi">Sem fio 2,4 GHz</span></td><td>Estoque e balcão</td><td>Confirme receptor USB e leitura EAN-13</td></tr>
+ </tbody></table></div>
+ <p class="muted-note">Importante: conexão sem fio via receptor USB 2,4 GHz não significa necessariamente conexão Bluetooth. Consulte o anúncio antes de adquirir para celular, tablet ou outros dispositivos.</p>
+</div></section>
+<section class="section" id="duvidas"><div class="wrap">
+ <div class="section-head"><div><div class="kicker">05 / Suporte e solução de problemas</div><h2>Dúvidas frequentes</h2><p class="lead">Verificações rápidas para identificar problemas entre o leitor, o código impresso e o campo de cadastro.</p></div></div>
+ <div class="faq">
+  <details><summary>O leitor apita, mas não preenche o campo. O que fazer?</summary><p>Verifique se o cursor está no campo correto. Faça a leitura no Bloco de Notas. Caso não apareça nenhum caractere, confira o manual do aparelho e selecione o modo USB HID/Keyboard Wedge, quando compatível. Se o dispositivo estiver em modo serial/COM, ele não preencherá automaticamente campos de texto como um teclado.</p></details>
+  <details><summary>O leitor está retornando menos de 13 números.</summary><p>Confira se o código impresso é realmente EAN-13 (existem EAN-8, UPC-A e outros padrões), se a impressão está íntegra e se o leitor está configurado para transmitir todos os dígitos. Verifique também configurações de prefixo, sufixo e supressão de zeros à esquerda no manual.</p></details>
+  <details><summary>Meu leitor precisa ter botão ou base de apoio?</summary><p>Não obrigatoriamente. O botão é útil na leitura manual; o suporte pode facilitar leituras repetidas sobre a bancada, desde que o modelo aceite operação automática. Verifique as características e o conteúdo do kit de cada anúncio.</p></details>
+  <details><summary>Qual é a diferença entre leitor 1D e 2D?</summary><p>Leitores 1D são voltados para símbolos lineares como EAN-13 e Code 128. Para QR Code ou Data Matrix, selecione um dispositivo que declare compatibilidade 2D. Um modelo 2D também pode ler EAN-13 quando essa simbologia estiver suportada e habilitada.</p></details>
+  <details><summary>Leitores sem fio funcionam por Bluetooth?</summary><p>Não necessariamente. Muitos leitores utilizam radiofrequência de 2,4 GHz por meio de um receptor USB próprio; isso é diferente de Bluetooth. Confirme o protocolo, o receptor, a autonomia e a compatibilidade com seu computador.</p></details>
+  <details><summary>Por que o código é lido no Bloco de Notas, mas não no sistema?</summary><p>Isso geralmente indica que o leitor está transmitindo caracteres. Confira o foco do campo correto, a necessidade de Enter/Tab ao final da leitura, a sequência recebida, a associação ao produto e as regras do sistema. O funcionamento no Bloco de Notas não garante configuração completa para todos os fluxos.</p></details>
+  <details><summary>O leitor não está lendo a etiqueta impressa.</summary><p>Teste com outro EAN-13 de boa qualidade. Confira barras escuras, papel claro, contraste, tamanho, ausência de cortes e áreas em branco nas duas extremidades do símbolo. Limpe a janela de leitura e consulte a distância recomendada pelo fabricante.</p></details>
+  <details><summary>O verificador matemático confirma que o código é oficial?</summary><p>Não. O cálculo do último dígito detecta parte dos erros de digitação ou leitura, mas não verifica atribuição, propriedade, cadastro GS1 nem correspondência entre o número e um produto. Para obter identificação oficial, consulte a GS1 Brasil.</p></details>
+ </div>
+</div></section>
+<section class="section" id="fontes-tecnicas"><div class="wrap">
+ <div class="section-head"><div><div class="kicker">06 / Documentação consultada</div><h2>Fontes e referências técnicas</h2><p class="lead">Links externos para validação de características e regras de codificação. Informações de anúncio podem mudar sem aviso.</p></div></div>
+ <div class="source-panel">
+  <a href="https://www.gs1br.org/ean-13" target="_blank" rel="noopener noreferrer">↗ GS1 Brasil — padrão EAN-13</a>
+  <a href="https://blog.gs1br.org/o-que-significa-cada-elemento-do-codigo-de-barras/" target="_blank" rel="noopener noreferrer">↗ GS1 Brasil — estrutura e dígito verificador</a>
+  <a href="https://blog.gs1br.org/como-evitar-problemas-na-leitura-do-codigo-de-barras/" target="_blank" rel="noopener noreferrer">↗ GS1 Brasil — problemas comuns de leitura</a>
+  <a href="https://www.gs1.org/standards/barcodes/10-steps-to-barcode-your-product/portugues" target="_blank" rel="noopener noreferrer">↗ GS1 — orientações para impressão</a>
+  <a href="https://www.c3technology.com.br/leitor-de-codigo-de-barras-1d-usb-lb-50bk-c3tech/p" target="_blank" rel="noopener noreferrer">↗ C3Tech — LB-50, ficha do fabricante</a>
+  <a href="https://www.elgin.com.br/leitor-de-codigo-de-barras-flash-ii-linear-300-ss-usb/p" target="_blank" rel="noopener noreferrer">↗ Elgin — Flash II, ficha do fabricante</a>
+  <a href="https://www.goldensky.com.br/informatica-eletronicos/informatica-acessorios/leitor-qr-code-codigo-de-barras-semfio-wireless-usb-2d-danfe" target="_blank" rel="noopener noreferrer">↗ Goldensky — GS-L8, página do fornecedor</a>
+  <a href="https://www.kabum.com.br/produto/533011/leitor-codigo-de-barras-exbom-usb-sem-fio-2-4ghz-lcb-s600a" target="_blank" rel="noopener noreferrer">↗ Exbom LCB-S600A — descrição comercial</a>
+ </div>
+ <div class="disclaimer" style="margin-top:25px"><span aria-hidden="true" style="font-size:25px">ⓘ</span><div><b>Observação importante sobre os links de indicação</b><p>Indicamos leitores 1D como referência para leitura de códigos de barras impressos; não realizamos venda de equipamentos. Os links para Mercado Livre e Shopee conduzem a vendedores externos, sujeitos a alterações e disponibilidade. Caso um link não funcione, pesquise o nome do modelo em uma loja de sua preferência. Antes da compra, confira a descrição completa e a compatibilidade com EAN-13.</p></div></div>
+ </div></section>
+</main>
+<footer><div class="wrap footer-content"><div><strong>PHIBO</strong><div>Material informativo • Leitores de código de barras</div></div><div>Informações pesquisadas em outubro de 2026 · <a href="index.html">Voltar ao guia ↗</a></div></div></footer>
+<div id="toast" class="toast" role="status" aria-live="polite"></div>
+<script>
+(()=>{'use strict';
+ const $ = s => document.querySelector(s);
+ // Ilustrações locais de reserva: mantêm o catálogo visual mesmo se a loja externa bloquear suas fotos.
+ document.querySelectorAll('.p-visual .product-img').forEach((img,i)=>{
+   const stand=i===0||i===2;
+   const wireless=i===3;
+   const art=document.createElementNS('http://www.w3.org/2000/svg','svg');
+   art.setAttribute('class','scanner-placeholder');art.setAttribute('viewBox','0 0 180 150');art.setAttribute('aria-hidden','true');
+   art.innerHTML=`<ellipse cx=90 cy=138 rx=61 ry=9 fill="#b2c5d4" opacity=".38"/><path d="M68 44L104 47 128 62 116 78 110 125Q105 136 94 134L76 129Q72 124 76 108L80 79 60 63Z" fill="#213b50"/><path d="M44 25Q52 15 73 15L132 26Q143 29 145 42L146 56Q147 67 136 72L65 67Q47 65 43 49Z" fill="#122939"/><path d="M49 31Q55 23 66 24L128 35Q137 38 136 44L56 40Z" fill="#7395aa"/><path d="M80 78L97 81 94 96 76 92Z" fill="${wireless?'#1b91cd':'#e4b34d'}"/><path d="M84 106L106 109 100 127 83 124Z" fill="#2d536e"/>${stand?'<path d="M107 121L126 127 146 132 149 137 65 137 70 131 91 127Z" fill="#526d80"/>':''}${wireless?'<rect x="131" y="118" width="28" height="13" rx="3" fill="#365774"/><rect x="141" y="108" width="8" height="18" fill="#a6c2d6"/>':'<path d="M99 133Q134 149 160 130" fill="none" stroke="#546e83" stroke-width="3" stroke-linecap="round"/>'}`;
+   img.parentElement.insertBefore(art,img);
+   img.addEventListener('load',()=>{art.style.display='none'});
+   img.addEventListener('error',()=>{img.style.display='none';art.style.display='block'});
+   if(img.complete&&img.naturalWidth>0)art.style.display='none';
+ });
+ const showToast=msg=>{const el=$('#toast');el.textContent=msg;el.classList.add('show');clearTimeout(showToast.t);showToast.t=setTimeout(()=>el.classList.remove('show'),2800)};
+ // Tabelas oficiais de codificação da simbologia EAN-13.
+ const L=['0001101','0011001','0010011','0111101','0100011','0110001','0101111','0111011','0110111','0001011'];
+ const G=['0100111','0110011','0011011','0100001','0011101','0111001','0000101','0010001','0001001','0010111'];
+ const R=['1110010','1100110','1101100','1000010','1011100','1001110','1010000','1000100','1001000','1110100'];
+ const PAR=['LLLLLL','LLGLGG','LLGGLG','LLGGGL','LGLLGG','LGGLLG','LGGGLL','LGLGLG','LGLGGL','LGGLGL'];
+ function calcCheck(first12){let sum=0;for(let i=0;i<12;i++)sum+=Number(first12[i])*(i%2===0?1:3);return String((10-sum%10)%10)}
+ function validate(raw){const v=raw.trim();if(!/^\d{12,13}$/.test(v))return {valid:false,msg:'Informe exatamente 12 ou 13 dígitos numéricos, sem espaços ou letras.'};const wanted=calcCheck(v.slice(0,12));if(v.length===12)return {valid:true,number:v+wanted,msg:'Dígito verificador calculado: '+wanted+'. Código completo: '+v+wanted+'.'};if(v[12]!==wanted)return {valid:false,msg:'Dígito verificador incorreto. O último número deveria ser '+wanted+' para os 12 dígitos informados.'};return {valid:true,number:v,msg:'Sequência de 13 dígitos matematicamente válida. Isso não comprova cadastro ou autenticidade GS1.'}}
+ function encode(num){let bits='101',p=PAR[Number(num[0])];for(let i=1;i<=6;i++)bits+=(p[i-1]==='L'?L:G)[Number(num[i])];bits+='01010';for(let i=7;i<13;i++)bits+=R[Number(num[i])];return bits+'101'}
+ function barcodeSvg(num){const data=encode(num);let rects='';const mm=.33;for(let i=0;i<data.length;i++){if(data[i]!=='1')continue;let isGuard=(i<3)||(i>=45&&i<50)||(i>=92);rects+=`<rect x="${((i+11)*mm).toFixed(2)}" y="1" width="${mm}" height="${isGuard?'22.9':'21.15'}" fill="#101822"/>`}
+  const texts=[`<text x="1.4" y="25.10" font-size="3.1" fill="#101822" font-family="Arial,Helvetica,sans-serif">${num[0]}</text>`];
+  for(let i=1;i<=6;i++)texts.push(`<text text-anchor="middle" x="${((11+3+7*(i-.5))*mm).toFixed(2)}" y="25.13" font-family="Arial,Helvetica,sans-serif" font-size="2.8" fill="#101822">${num[i]}</text>`);
+  for(let i=7;i<13;i++)texts.push(`<text text-anchor="middle" x="${((11+50+7*(i-6.5))*mm).toFixed(2)}" y="25.13" font-family="Arial,Helvetica,sans-serif" font-size="2.8" fill="#101822">${num[i]}</text>`);
+  return `<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 37.29 25.93" width="37.29mm" height="25.93mm" role="img" aria-label="Código EAN-13 ${num}"><rect width="37.29" height="25.93" fill="#fff"/>${rects}${texts.join('')}</svg>`
+ }
+ $('#heroBarcode').innerHTML=barcodeSvg('7890123456784');
+ document.querySelectorAll('.filter').forEach(btn=>btn.addEventListener('click',()=>{const filter=btn.dataset.filter;document.querySelectorAll('.filter').forEach(x=>{const selected=x===btn;x.classList.toggle('active',selected);x.setAttribute('aria-pressed',String(selected))});document.querySelectorAll('.product').forEach(item=>item.classList.toggle('hide',filter!=='todos'&&item.dataset.connection!==filter))}));
+})();
+</script>
+</body>
+</html>

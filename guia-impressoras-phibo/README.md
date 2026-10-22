@@ -1,12 +1,9 @@
-# Guia de Impressoras Phibo — versão 10
-Projeto estático da Phibo preparado para GitHub Pages, Vercel e demais hospedagens, mantendo a versão 9 e integrando a página de cupons.
-- index.html: guia principal; aba Impressoras de cupom carrega o catálogo incorporado
-- impressoras-cupom-phibo.html: seis modelos homologados, comparativo, orientações, links e bobinas
-- leitores-codigo-barras-phibo.html: catálogo de leitores, sem a seção de diagnóstico solicitada para remoção
+# Guia de Impressoras Phibo v11
 
-Botão de bobinas: https://phibo3.lojavirtualnuvem.com.br/bobina/
-Não há build e as fotos estão incorporadas nos próprios arquivos HTML.
+Guia principal `index.html` com os modelos e formatos tradicionais 50 × 70, 33 × 21 e 95 × 12 mm exclusivos dos equipamentos homologados da primeira lista.
 
-**Publicação:** em sites estáticos, mantenha os três HTML no mesmo diretório (ou preserve os links relativos). A página principal é index.html.
-**Vercel original:** https://guia-impressoras-phibo-marcosjosimar0-6448.vercel.app
-**Histórico:** integração da página de cupom e atualização de fornecedor de bobinas em 21/10/2026.
+Etiquetas e tags da linha de novos modelos ficam em seção própria. A tag 50 × 75 mm tem destaque amarelo e é exclusiva para o plano Ouro.
+
+O catálogo de cupom (6 modelos) é incorporado ao `index.html` com `srcdoc`, para que a aba funcione mesmo quando um segundo HTML não estiver presente na hospedagem. `impressoras-cupom-phibo.html` continua como página independente.
+
+Publicação Vercel: configurar o repositório `MarcosJosimar/phibo` e Root Directory `guia-impressoras-phibo`. O projeto na Vercel deve realizar novo deploy do branch `main` para receber esta atualização.

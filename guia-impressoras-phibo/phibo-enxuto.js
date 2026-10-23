@@ -38,3 +38,34 @@ $$('a[href="#etiquetas"],a[href="#novidades"],a[href="#suprimentos"],a[href="#vi
 selectCategory("etiquetas");
 hide($("#inicio"));
 })();
+
+/* Correção definitiva do vazamento de etiquetas para outras categorias. */
+(()=>{
+"use strict";
+const css=document.createElement("style");css.id="ph-strict-categories";
+css.textContent=String.raw`body[data-ph-category="cupons"] :is(#inicio,#visao-geral,#etiquetas,#suprimentos,#novidades,#modelo-elgin-epl,#duvidas),
+body[data-ph-category="a4"] :is(#inicio,#visao-geral,#etiquetas,#suprimentos,#novidades,#modelo-elgin-epl,#duvidas){display:none!important}
+body[data-ph-category="cupons"] #modelos>.sectop,body[data-ph-category="a4"] #modelos>.sectop{display:none!important}
+body[data-ph-category="cupons"] :is(#panel-etiquetas,#panel-a4),body[data-ph-category="a4"] :is(#panel-etiquetas,#panel-cupons),body[data-ph-category="etiquetas"] :is(#panel-cupons,#panel-a4){display:none!important}
+body[data-ph-category="cupons"] #panel-cupons,body[data-ph-category="a4"] #panel-a4,body[data-ph-category="etiquetas"] #panel-etiquetas{display:block!important}
+body[data-ph-category="cupons"] #modelos{margin-top:16px}
+#panel-cupons .coupon-panel-head{display:none!important}`;
+document.head.append(css);
+function categoria(tipo){
+ if(!["etiquetas","cupons","a4"].includes(tipo))return;
+ document.body.dataset.phCategory=tipo;
+ document.querySelectorAll('#modelos .tab[data-tab]').forEach(tab=>{
+   const on=tab.dataset.tab===tipo;tab.setAttribute("aria-selected",String(on));
+   const p=document.getElementById("panel-"+tab.dataset.tab);if(p){p.hidden=!on;p.setAttribute("aria-hidden",String(!on))}
+ });
+}
+document.addEventListener("click",event=>{
+ const t=event.target.closest("#modelos .tab[data-tab]");
+ if(t){categoria(t.dataset.tab);return}
+ const a=event.target.closest("a[href]");if(!a)return;
+ if(["#etiquetas","#novidades","#suprimentos","#visao-geral","#inicio"].includes(a.getAttribute("href")))categoria("etiquetas");
+},true);
+window.addEventListener("hashchange",()=>{if(location.hash==="#cupons"||location.hash==="#panel-cupons")categoria("cupons");else if(location.hash==="#a4")categoria("a4");else if(["#etiquetas","#novidades","#suprimentos","#visao-geral","#inicio"].includes(location.hash))categoria("etiquetas")});
+categoria(location.hash==="#cupons"||location.hash==="#panel-cupons"?"cupons":location.hash==="#a4"?"a4":"etiquetas");
+window.PhiboSelecionarCategoria=categoria;
+})();

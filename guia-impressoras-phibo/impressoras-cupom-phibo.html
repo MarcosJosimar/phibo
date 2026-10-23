@@ -128,32 +128,34 @@ body.ph-integrated main{margin-top:0}
 </style>
 <script>
 (()=>{
-const $=(s,r=document)=>r.querySelector(s),$=(s,r=document)=>Array.from(r.querySelectorAll(s));
-function remove(s){$(s).forEach(x=>x.remove())}
+const q=(s,r=document)=>r.querySelector(s),qa=(s,r=document)=>Array.from(r.querySelectorAll(s));
+function remove(s){qa(s).forEach(x=>x.remove())}
+function removeIn(root,s){qa(s,root).forEach(x=>x.remove())}
 remove("#comparar,.source-area,#duvidas details.overview,footer,.reference-note,#orientacoes .guide-panel:first-child");
-const heroDesc=$(".hero-lead");if(heroDesc)heroDesc.textContent="Escolha um modelo e acesse o link de compra.";
-const modelDesc=$("#modelos .section-desc");if(modelDesc)modelDesc.textContent="Consulte o modelo e a conexão necessária. Links de compra são referências.";
-$("#modelos .product-card").forEach(card=>{
- const info=$(".product-info",card);if(!info)return;
- const connection=[...$(".spec-list>div",card)].find(d=>/conexão/i.test(d.textContent));
- const con=connection?.querySelector("strong")?.textContent?.trim()||"Conforme a versão";
- let brief=document.createElement("p");brief.className="ph-mini";brief.textContent="Conexão: "+con+" · Bobina térmica: 80 mm";
- let title=$("h3",info);if(title)title.insertAdjacentElement("afterend",brief);
- removeIn(card,".product-desc,.spec-list,.product-note,.product-actions .btn-ghost,.visual-tag");
- if(card.id==="bematech"){const w=$(".product-warning",card);if(w)w.textContent="⚠ Atenção: não adquirir a versão MP-4200 ADV."}else removeIn(card,".product-warning");
- const buy=$(".product-actions .btn-primary",card);if(buy)buy.textContent="Onde comprar ↗";
+const heroDesc=q(".hero-lead");if(heroDesc)heroDesc.textContent="Escolha um modelo e acesse o link de compra.";
+const modelDesc=q("#modelos .section-desc");if(modelDesc)modelDesc.textContent="Consulte o modelo e a conexão necessária. Links de compra são referências.";
+qa("#modelos .product-card").forEach(card=>{
+const info=q(".product-info",card);if(!info)return;
+const connection=qa(".spec-list>div",card).find(d=>/conexão/i.test(d.textContent));
+const con=connection?.querySelector("strong")?.textContent?.trim()||"Conforme a versão";
+let brief=document.createElement("p");brief.className="ph-mini";brief.textContent="Conexão: "+con+" · Bobina térmica: 80 mm";
+let title=q("h3",info);if(title)title.insertAdjacentElement("afterend",brief);
+removeIn(card,".product-desc,.spec-list,.product-note,.product-actions .btn-ghost,.visual-tag");
+if(card.id==="bematech"){const w=q(".product-warning",card);if(w)w.textContent="⚠ Atenção: não adquirir a versão MP-4200 ADV."}
+else removeIn(card,".product-warning");
+const buy=q(".product-actions .btn-primary",card);if(buy)buy.textContent="Onde comprar ↗";
 });
-function removeIn(root,s){$(s,root).forEach(x=>x.remove())}
-const orient=$("#orientacoes");if(orient){const h=$("h2",orient);if(h)h.textContent="Entenda as conexões";let p=$(".section-desc",orient);if(p)p.textContent="USB: conexão direta · LAN/Ethernet: conexão pela rede · COM/Serial: RS-232. Bluetooth ou Wi-Fi dependem da versão.";removeIn(orient,".guide-panel>h3,.guide-panel .reference-note");}
-const bob=$("#bobinas");if(bob){let p=$(".paper-band p",bob);if(p)p.textContent="Para impressoras térmicas de cupom, escolha bobinas térmicas de 80 mm e confira o diâmetro aceito.";let h=$("h2",bob);if(h)h.textContent="Onde comprar bobinas de 80 mm?";}
-const qs=$("#duvidas details.faq-item");if(qs[0])qs[0].querySelector("p").textContent="Não. Impressoras de cupom usam bobinas contínuas. Impressoras de etiquetas utilizam layouts e mídias próprios.";
-if(qs[1])qs[1].querySelector("p").textContent="Não. A impressão térmica utiliza papel sensível ao calor, sem tinta nem toner.";
-if(qs[2])qs[2].querySelector("p").textContent="Não. A impressora não fiscal imprime documentos, mas não autoriza nem substitui a emissão de documentos fiscais quando ela é exigida.";
-if(qs[3]){qs[3].querySelector("summary").textContent="Qualquer impressora POS-80 funciona com a Phibo?";qs[3].querySelector("p").textContent="Não necessariamente. POS-80 é um nome genérico. Verifique o driver Windows, a conexão e a compatibilidade da versão antes de comprar."}
-if(qs[4])qs[4].querySelector("p").textContent="Sim. Você pode escolher outros fornecedores. Os anúncios apresentados servem como referências de compra.";
-const d=$(".disclaimer p");if(d)d.textContent="Os links são apenas referências de compra. Confirme o modelo exato, a reputação do fornecedor, a garantia e o prazo de entrega.";
-const section=$("#duvidas .section-desc");if(section)section.textContent="Respostas rápidas sobre impressão de cupons.";
-if(new URLSearchParams(location.search).get("integrado")==="1"){document.body.classList.add("ph-integrated")}
+const orient=q("#orientacoes");if(orient){const h=q("h2",orient);if(h)h.textContent="Entenda as conexões";let p=q(".section-desc",orient);if(p)p.textContent="USB: conexão direta · LAN/Ethernet: conexão pela rede · COM/Serial: RS-232. Bluetooth ou Wi-Fi dependem da versão.";removeIn(orient,".guide-panel>h3,.guide-panel .reference-note");}
+const bob=q("#bobinas");if(bob){let p=q(".paper-band p",bob);if(p)p.textContent="Para impressoras térmicas de cupom, escolha bobinas térmicas de 80 mm e confira o diâmetro aceito.";let h=q("h2",bob);if(h)h.textContent="Onde comprar bobinas de 80 mm?";}
+const qs=qa("#duvidas details.faq-item");
+if(qs[0])q("p",qs[0]).textContent="Não. Impressoras de cupom usam bobinas contínuas. Impressoras de etiquetas utilizam layouts e mídias próprios.";
+if(qs[1])q("p",qs[1]).textContent="Não. A impressão térmica utiliza papel sensível ao calor, sem tinta nem toner.";
+if(qs[2])q("p",qs[2]).textContent="Não. A impressora não fiscal imprime documentos, mas não autoriza nem substitui a emissão de documentos fiscais quando ela é exigida.";
+if(qs[3]){q("summary",qs[3]).textContent="Qualquer impressora POS-80 funciona com a Phibo?";q("p",qs[3]).textContent="Não necessariamente. POS-80 é um nome genérico. Verifique o driver Windows, a conexão e a compatibilidade da versão antes de comprar."}
+if(qs[4])q("p",qs[4]).textContent="Sim. Você pode escolher outros fornecedores. Os anúncios apresentados servem como referências de compra.";
+const d=q(".disclaimer p");if(d)d.textContent="Os links são apenas referências de compra. Confirme o modelo exato, a reputação do fornecedor, a garantia e o prazo de entrega.";
+const section=q("#duvidas .section-desc");if(section)section.textContent="Respostas rápidas sobre impressão de cupons.";
+if(new URLSearchParams(location.search).get("integrado")==="1")document.body.classList.add("ph-integrated");
 })();
 </script>
 </body></html>

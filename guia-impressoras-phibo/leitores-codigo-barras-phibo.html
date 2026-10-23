@@ -295,5 +295,14 @@
  document.querySelectorAll('.filter').forEach(btn=>btn.addEventListener('click',()=>{const filter=btn.dataset.filter;document.querySelectorAll('.filter').forEach(x=>{const selected=x===btn;x.classList.toggle('active',selected);x.setAttribute('aria-pressed',String(selected))});document.querySelectorAll('.product').forEach(item=>item.classList.toggle('hide',filter!=='todos'&&item.dataset.connection!==filter))}));
 })();
 </script>
+
+<style id="leitores-simples">#comparativo,#duvidas,#fontes-tecnicas{display:none!important}#modelos .disclaimer{margin:28px 0 5px}.hero-grid{min-height:340px;padding-top:35px;padding-bottom:40px}</style>
+<script>
+(()=>{const q=s=>document.querySelector(s);const note=q("#fontes-tecnicas .disclaimer"),spot=q("#modelos .wrap");if(note&&spot)spot.append(note);
+for(const a of document.querySelectorAll("a[href]")){if(["#comparativo","#duvidas","#fontes-tecnicas"].includes(a.getAttribute("href")))a.style.display="none"}
+let h=q(".hero-p");if(h)h.textContent="Consulte leitores de código de barras, veja links de compra e confira o padrão EAN-13.";
+let lead=q("#modelos .lead");if(lead)lead.textContent="Modelos de referência para leitura de códigos EAN-13. Escolha um leitor e consulte as opções de compra.";
+})();
+</script>
 </body>
 </html>

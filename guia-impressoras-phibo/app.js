@@ -18,12 +18,12 @@ function categorySwitch(which,{scroll=false}={}){
     b.tabIndex=active?0:-1;
   });
   $$('[data-panel]').forEach(p=>{p.hidden=p.dataset.panel!==which});
-  try{if(history.replaceState)history.replaceState(null,'','#'+which)}catch(_){/* sandboxed viewer may block History API */}
+  try{if(history.replaceState)history.replaceState(null,'','#'+which)}catch(_){/* iframe sandbox pode bloquear History */}
   if(scroll) $('#main').scrollIntoView({behavior:'smooth',block:'start'});
 }
 function groupSwitch(which){
   $$('[data-subtab]').forEach(b=>{let current=b.dataset.subtab===which;b.classList.toggle('active',current);b.setAttribute('aria-selected',String(current))});
-  $$('[data-subpanel]').forEach(p=>p.hidden=p.dataset.subpanel!==which);
+  $$('[data-subpanel]').forEach(p=>p.hidden=false);
   closeMenus();
 }
 function imgBlock(key,name){
@@ -119,7 +119,7 @@ function render(){
 
   D.coupons.forEach(p=>$('#cupom-cards').append(modelCard(p,'coupon')));
   D.readers.forEach(p=>{
-    const card=create('article','card');let visual=create('div','photo'),glyph=create('span','reader-icon','▥');glyph.setAttribute('aria-hidden','true');visual.append(glyph);card.append(visual);
+    const card=create('article','card');card.append(imgBlock(p.img,p.brand+' '+p.name));
     const info=create('div','info');info.append(create('span','brandname',p.brand),create('h3','',p.name));
     const m=create('div','meta');m.append(tag(p.conn));info.append(m);
     const row=create('div','actions'),link=buy('Onde comprar',p.links);if(link)row.append(link);info.append(row);card.append(info);$('#reader-cards').append(card);
@@ -139,7 +139,7 @@ function setup(){
   document.addEventListener('click',e=>{if(!e.target.closest('details.buy'))closeMenus()});
   window.addEventListener('hashchange',()=>{const requested=location.hash.slice(1);if(['etiquetas','cupom','a4','leitores'].includes(requested))categorySwitch(requested)});
 }
-render();setup();groupSwitch('homologadas');
+render();setup();groupSwitch('novos');
 const initial=location.hash.slice(1);
 categorySwitch(['etiquetas','cupom','a4','leitores'].includes(initial)?initial:'etiquetas');
 })();
